@@ -8,11 +8,13 @@ const Counter = () => {
     }, 3000)
   }
 
+  // 函数式更新，解除依赖
   useEffect(() => {
-    setTimeout(() => {
-      console.log(`Yout clicked ${count} times`)
-    }, 3000);
-  })
+    const id = setInterval(() => {
+      setCount(count => count + 1)
+    }, 1000);
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <div>
